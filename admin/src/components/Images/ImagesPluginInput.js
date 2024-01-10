@@ -149,7 +149,7 @@ export default class ImagesPluginInput extends React.Component {
                     <FieldLabel style={{ marginBottom: "10px" }}>
                       Rooms
                     </FieldLabel>
-                    <Flex gap={5} wrap="wrap">
+                    <Flex gap={5} style={{ flexWrap: "wrap" }} wrap={true}>
                       {this.state.obj.room.map((item, i) => {
                         return (
                           <Box key={`box-${i}`} shadow="tableShadow" hasRadius>
@@ -183,7 +183,7 @@ export default class ImagesPluginInput extends React.Component {
                     <FieldLabel style={{ marginBottom: "10px" }}>
                       Hotel
                     </FieldLabel>
-                    <Flex gap={5} flex-wrap="wrap">
+                    <Flex gap={5} style={{ flexWrap: "wrap" }} wrap={true}>
                       {this.state.obj.hotel.map((item, i) => {
                         return (
                           <Box key={`box-${i}`} shadow="tableShadow" hasRadius>
@@ -217,7 +217,7 @@ export default class ImagesPluginInput extends React.Component {
                     <FieldLabel style={{ marginBottom: "10px" }}>
                       General
                     </FieldLabel>
-                    <Flex gap={5} flex-wrap="wrap">
+                    <Flex gap={5} style={{ flexWrap: "wrap" }} wrap={true}>
                       {this.state.obj.general.map((item, i) => {
                         return (
                           <Box key={`box-${i}`} shadow="tableShadow" hasRadius>
@@ -251,7 +251,7 @@ export default class ImagesPluginInput extends React.Component {
                     <FieldLabel style={{ marginBottom: "10px" }}>
                       Service
                     </FieldLabel>
-                    <Flex gap={5} flex-wrap="wrap">
+                    <Flex gap={5} style={{ flexWrap: "wrap" }} wrap={true}>
                       {this.state.obj.service.map((item, i) => {
                         return (
                           <Box key={`box-${i}`} shadow="tableShadow" hasRadius>
@@ -300,23 +300,27 @@ export default class ImagesPluginInput extends React.Component {
                   >
                     {this.state.selected.caption}
                   </Typography>
-                  <Flex gap={5} flex-wrap="wrap">
-                    <Button
-                      type="button"
-                      variant="default"
-                      onClick={this.copyObj}
-                      title="Copy image obj"
-                    >
-                      Copy
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="default"
-                      onClick={this.closeImage}
-                      title="Close image"
-                    >
-                      Close
-                    </Button>
+                  <Flex gap={5}>
+                    <Box>
+                      <Button
+                        type="button"
+                        variant="default"
+                        onClick={this.copyObj}
+                        title="Copy image obj"
+                      >
+                        Copy
+                      </Button>
+                    </Box>
+                    <Box>
+                      <Button
+                        type="button"
+                        variant="default"
+                        onClick={this.closeImage}
+                        title="Close image"
+                      >
+                        Close
+                      </Button>
+                    </Box>
                   </Flex>
                 </GridItem>
               ) : (
