@@ -1,0 +1,39 @@
+{
+  "name": "@stayyond/strapi-images",
+  "version": "1.0.3",
+  "description": "A tag input custom field that allows multiple strings to be added",
+  "strapi": {
+    "name": "images",
+    "description": "A custom field that shows images from json",
+    "kind": "plugin",
+    "displayName": "Images"
+  },
+  "dependencies": {
+    "@strapi/design-system": "^1.12.2",
+    "@strapi/icons": "^1.12.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "peerDependencies": {
+    "@strapi/strapi": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stayyond/strapi-images"
+  },
+  "author": {
+    "name": "Emily Vinsen",
+    "email": "emily@yond.co"
+  },
+  "maintainers": [
+    {
+      "name": "Emily Vinsen",
+      "email": "emily@yond.co"
+    }
+  ],
+  "engines": {
+    "node": ">=14.19.1 <=18.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}
