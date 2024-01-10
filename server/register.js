@@ -3,8 +3,8 @@
 module.exports = ({ strapi }) => {
   // registeration phase
   strapi.customFields.register({
-    name: "images",
-    plugin: "images",
+    name: "images-category",
+    plugin: "images-category",
     type: "json",
   });
 };
