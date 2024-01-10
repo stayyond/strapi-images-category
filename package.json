@@ -3,7 +3,7 @@
   "version": "1.0.01",
   "description": "A tag input custom field that allows multiple strings to be added",
   "strapi": {
-    "name": "images",
+    "name": "images-category",
     "description": "A custom field that shows images from json by category",
     "kind": "plugin",
     "displayName": "Images by category"
