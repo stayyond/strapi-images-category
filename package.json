@@ -1,6 +1,6 @@
 {
   "name": "@stayyond/strapi-images-category",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "A tag input custom field that allows multiple strings to be added",
   "strapi": {
     "name": "images-category",
