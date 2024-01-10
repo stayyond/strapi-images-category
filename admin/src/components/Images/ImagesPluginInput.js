@@ -22,26 +22,31 @@ export default class ImagesPluginInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: props.value ? JSON.parse(props.value) : [],
+      obj: props.value ? JSON.parse(props.value) : {},
       imageOpen: false,
       selected: null,
       showImages: true,
     };
+    console.log("obj", this.state.obj);
     this.openImage = this.openImage.bind(this);
     this.closeImage = this.closeImage.bind(this);
     this.toggleView = this.toggleView.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.copyObj = this.copyObj.bind(this);
   }
 
   // componentDidMount() {
   //   console.log("HERE", this.props.value);
   // }
 
-  openImage(index) {
+  openImage(index, type) {
     // console.log("Open Image");
+    let arr = this.state.obj[type];
+    console.log("arr", arr);
+
     this.setState({
       imageOpen: true,
-      selected: this.state.list[index],
+      selected: arr[index],
     });
   }
 
@@ -51,6 +56,17 @@ export default class ImagesPluginInput extends React.Component {
       imageOpen: false,
       selected: null,
     });
+  }
+
+  async copyObj() {
+    // console.log("closeImage");
+    let text = JSON.stringify(this.state.selected);
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("Text copied to clipboard:", text);
+    } catch (error) {
+      alert("Error copying to clipboard:", error);
+    }
   }
 
   toggleView() {
@@ -71,7 +87,7 @@ export default class ImagesPluginInput extends React.Component {
         },
       });
       this.setState({
-        list: value ? JSON.parse(value) : [],
+        obj: value ? JSON.parse(value) : [],
       });
     }
   }
@@ -125,16 +141,21 @@ export default class ImagesPluginInput extends React.Component {
           {this.state.showImages ? (
             <Grid
               gridCols={this.state.imageOpen && this.state.selected ? 2 : 1}
+              gap={this.state.imageOpen && this.state.selected ? "10px" : "0px"}
             >
               <GridItem>
-                <Flex wrap="wrap" gap={5}>
-                  {this.state.list?.length && typeof this.state.list == "object"
-                    ? this.state.list?.map((item, i) => {
+                {this.state.obj?.room && this.state.obj.room.length ? (
+                  <div style={{ marginBottom: "20px", marginTop: "20px" }}>
+                    <FieldLabel style={{ marginBottom: "10px" }}>
+                      Rooms
+                    </FieldLabel>
+                    <Flex gap={5} wrap="wrap">
+                      {this.state.obj.room.map((item, i) => {
                         return (
                           <Box key={`box-${i}`} shadow="tableShadow" hasRadius>
                             <button
                               type="button"
-                              onClick={() => this.openImage(i)}
+                              onClick={() => this.openImage(i, "room")}
                               title="Open image"
                               style={{ display: "block" }}
                             >
@@ -151,9 +172,114 @@ export default class ImagesPluginInput extends React.Component {
                             </button>
                           </Box>
                         );
-                      })
-                    : ""}
-                </Flex>
+                      })}
+                    </Flex>
+                  </div>
+                ) : (
+                  ""
+                )}
+                {this.state.obj?.hotel && this.state.obj.hotel.length ? (
+                  <div style={{ marginBottom: "20px" }}>
+                    <FieldLabel style={{ marginBottom: "10px" }}>
+                      Hotel
+                    </FieldLabel>
+                    <Flex gap={5} flex-wrap="wrap">
+                      {this.state.obj.hotel.map((item, i) => {
+                        return (
+                          <Box key={`box-${i}`} shadow="tableShadow" hasRadius>
+                            <button
+                              type="button"
+                              onClick={() => this.openImage(i, "hotel")}
+                              title="Open image"
+                              style={{ display: "block" }}
+                            >
+                              <img
+                                src={item.url}
+                                alt={item.caption}
+                                style={{
+                                  width: "150px",
+                                  height: "auto",
+                                  aspectRatio: 4 / 3,
+                                  objectFit: "cover",
+                                }}
+                              />
+                            </button>
+                          </Box>
+                        );
+                      })}
+                    </Flex>
+                  </div>
+                ) : (
+                  ""
+                )}
+                {this.state.obj?.general && this.state.obj.general.length ? (
+                  <div style={{ marginBottom: "20px" }}>
+                    <FieldLabel style={{ marginBottom: "10px" }}>
+                      General
+                    </FieldLabel>
+                    <Flex gap={5} flex-wrap="wrap">
+                      {this.state.obj.general.map((item, i) => {
+                        return (
+                          <Box key={`box-${i}`} shadow="tableShadow" hasRadius>
+                            <button
+                              type="button"
+                              onClick={() => this.openImage(i, "general")}
+                              title="Open image"
+                              style={{ display: "block" }}
+                            >
+                              <img
+                                src={item.url}
+                                alt={item.caption}
+                                style={{
+                                  width: "150px",
+                                  height: "auto",
+                                  aspectRatio: 4 / 3,
+                                  objectFit: "cover",
+                                }}
+                              />
+                            </button>
+                          </Box>
+                        );
+                      })}
+                    </Flex>
+                  </div>
+                ) : (
+                  ""
+                )}
+                {this.state.obj?.service && this.state.obj.service.length ? (
+                  <div style={{ marginBottom: "20px" }}>
+                    <FieldLabel style={{ marginBottom: "10px" }}>
+                      Service
+                    </FieldLabel>
+                    <Flex gap={5} flex-wrap="wrap">
+                      {this.state.obj.service.map((item, i) => {
+                        return (
+                          <Box key={`box-${i}`} shadow="tableShadow" hasRadius>
+                            <button
+                              type="button"
+                              onClick={() => this.openImage(i, "service")}
+                              title="Open image"
+                              style={{ display: "block" }}
+                            >
+                              <img
+                                src={item.url}
+                                alt={item.caption}
+                                style={{
+                                  width: "150px",
+                                  height: "auto",
+                                  aspectRatio: 4 / 3,
+                                  objectFit: "cover",
+                                }}
+                              />
+                            </button>
+                          </Box>
+                        );
+                      })}
+                    </Flex>
+                  </div>
+                ) : (
+                  ""
+                )}
               </GridItem>
               {this.state.imageOpen && this.state.selected ? (
                 <GridItem>
@@ -174,14 +300,24 @@ export default class ImagesPluginInput extends React.Component {
                   >
                     {this.state.selected.caption}
                   </Typography>
-                  <Button
-                    type="button"
-                    variant="default"
-                    onClick={this.closeImage}
-                    title="Close image"
-                  >
-                    Close
-                  </Button>
+                  <Flex gap={5} flex-wrap="wrap">
+                    <Button
+                      type="button"
+                      variant="default"
+                      onClick={this.copyObj}
+                      title="Copy image obj"
+                    >
+                      Copy
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="default"
+                      onClick={this.closeImage}
+                      title="Close image"
+                    >
+                      Close
+                    </Button>
+                  </Flex>
                 </GridItem>
               ) : (
                 ""
